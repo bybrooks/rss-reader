@@ -1,0 +1,107 @@
+{
+    "name": "rss-service",
+    "dockerComposeFile": [
+        "docker-compose.devcontainer.yml"
+    ],
+    "service": "app",
+    "workspaceFolder": "/workspace",
+    "shutdownAction": "stopCompose",
+    "features": {
+        "ghcr.io/devcontainers-extra/features/pre-commit:2": {},
+        "ghcr.io/devcontainers-extra/features/terraform-docs:1": {},
+        "ghcr.io/dhoeric/features/hadolint:1": {}
+    },
+    "postCreateCommand": "pre-commit install",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.mypy-type-checker",
+                "charliermarsh.ruff",
+                "njpwerner.autodocstring",
+                "ceintl.vscode-language-pack-ja",
+                "github.copilot",
+                "oderwat.indent-rainbow",
+                "shardulm94.trailing-spaces",
+                "hashicorp.terraform",
+                "exiasr.hadolint",
+                "usernamehw.errorlens",
+                "gruntfuggly.todo-tree",
+                "ms-azuretools.vscode-docker",
+                "redhat.vscode-yaml"
+            ],
+            "settings": {
+                "python.languageServer": "Pylance",
+                "trailing-spaces.trimOnSave": true,
+                "files.insertFinalNewline": true,
+                "files.trimTrailingWhitespace": true,
+                "python.analysis.autoFormatStrings": true, // 文字列で{}を使うと自動でf-stringとする
+                "python.analysis.autoImportCompletions": true, // 自動インポート
+                "[python]": {
+                    "editor.rulers": [
+                        {
+                            "column": 88,
+                            "color": "#dddcdc"
+                        }
+                    ],
+                    "editor.defaultFormatter": "charliermarsh.ruff",
+                    "editor.formatOnSave": true,
+                    "editor.codeActionsOnSave": {
+                        "source.organizeImports": "explicit"
+                    }
+                },
+                "[terraform]": {
+                    "editor.defaultFormatter": "hashicorp.terraform",
+                    "editor.formatOnSave": true,
+                    "editor.formatOnSaveMode": "file",
+                    "editor.tabSize": 2
+                },
+                "[terraform-test]": {
+                    "editor.defaultFormatter": "hashicorp.terraform",
+                    "editor.formatOnSave": true,
+                    "editor.formatOnSaveMode": "file",
+                    "editor.tabSize": 2
+                },
+                "[terraform-vars]": {
+                    "editor.defaultFormatter": "hashicorp.terraform",
+                    "editor.formatOnSave": true,
+                    "editor.formatOnSaveMode": "file",
+                    "editor.tabSize": 2
+                },
+                "mypy-type-checker.severity": {
+                    "error": "Error",
+                    "note": "Information"
+                },
+                "[yaml]": {
+                    "editor.insertSpaces": true,
+                    "editor.tabSize": 2,
+                    "editor.autoIndent": "advanced",
+                    "diffEditor.ignoreTrimWhitespace": true
+                },
+                "terminal.integrated.profiles.linux": {
+                    "bash": {
+                        "path": "bash",
+                        "icon": "terminal-bash"
+                    }
+                },
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "python.pythonPath": "/usr/local/bin/python3",
+                "python.linting.pylintEnabled": false,
+                "python.linting.lintOnSave": true,
+                "python.linting.enabled": true,
+                "python.linting.flake8Enabled": false,
+                "python.linting.mypyEnabled": true,
+                "python.analysis.inlayHints.callArgumentNames": "all",
+                "autoDocstring.docstringFormat": "google",
+                "python.testing.unittestEnabled": false,
+                "python.testing.pytestEnabled": true,
+                "python.testing.pytestArgs": [
+                    "-vv", // 詳細結果の出力
+                    "-s", // print文の出力
+                    "--cov=.", // カバレッジの出力
+                    "--cov-report=term-missing" // カバレッジの出力
+                ]
+            }
+        }
+    }
+}
