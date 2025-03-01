@@ -33,9 +33,8 @@ async def publish_new_article(channel: ChannelType, content: str) -> None:
         match subscribe_name:
             case "LangChain":
                 metadata = LangchainMetaData(num_read_article=int(metadata))
-                new_meatadata = await retrieve_langchain_changelog(channel, metadata)
-
-                read_status[subscribe_name] = str(new_meatadata)
+                new_metadata = await retrieve_langchain_changelog(channel, metadata)
+                read_status[subscribe_name] = str(new_metadata)
 
     new_content = "\n".join([f"{k}:{v}" for k, v in read_status.items()])
     await channel.send(new_content)
@@ -49,7 +48,7 @@ async def on_ready() -> None:
     クライアントが正常に起動したときに呼び出されます。
     この関数は、新着記事を取得して Discord チャンネルに投稿します。
     """
-    channel: ChannelType = client.get_channel(CHANNEL_ID)
+    channel: ChannelType = client.get_channel(int(CHANNEL_ID))
     if channel and isinstance(channel, Messageable):
         async for message in channel.history(limit=1):
             try:
