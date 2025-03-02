@@ -8,3 +8,12 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Terraform
+*.tfvars
+*.tfstate
+**/.terraform*
+
+# Secrets
+.env
+Makefile
